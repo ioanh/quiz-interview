@@ -29,13 +29,25 @@ export class QuizComponent implements OnInit {
 
 
   previousQ(){
-    const pQ = this.questions.indexOf(this.question) - 1
-    this.question = this.questions[pQ]
+    if(this.questions.indexOf(this.question) !== 0){
+      const pQ = this.questions.indexOf(this.question) - 1
+      this.question = this.questions[pQ]
+      this.progress -= 10;
+    }else {
+      this.question = this.question
+      this.progress = this.progress
+    }
   }
 
   nextQ(){
-    const nQ = this.questions.indexOf(this.question) + 1
-    this.question = this.questions[nQ]
+    if(this.questions.indexOf(this.question) !== 9){
+      const nQ = this.questions.indexOf(this.question) + 1
+      this.question = this.questions[nQ]
+      this.progress += 10;
+    }else{
+      this.question = this.question
+      this.progress = this.progress
+    }
   }
 
 }
