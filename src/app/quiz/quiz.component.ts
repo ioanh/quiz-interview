@@ -15,7 +15,8 @@ export class QuizComponent implements OnInit {
   questions: Array<Quiz>;
   question: Quiz;
   progress: number;
-  source = interval(1000);
+  source = interval(10000);
+  progressTimer = interval(1000)
 
   ngOnInit(): void {
     this.quizService.getQuestions().subscribe(
@@ -24,8 +25,12 @@ export class QuizComponent implements OnInit {
         this.questions = data.results
         console.log(this.questions)
         this.question = this.questions[0]
-        this.progress = 10;
-        this.source.subscribe(val => this.question = this.questions[val])
+        this.progress = 100;
+        this.source.subscribe((val) => {
+          this.question = this.questions[val + 1]
+          this.progress = 100;
+        })
+        this.progressTimer.subscribe(val => this.progress -= 10)
       }
     )
 
