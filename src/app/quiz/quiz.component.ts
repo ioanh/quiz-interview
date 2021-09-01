@@ -28,7 +28,7 @@ export class QuizComponent implements OnInit {
         this.progress = 100;
         this.source.subscribe((val) => {
           this.question = this.questions[val + 1]
-          this.progress = 100;
+          this.progress = 110;
         })
         this.progressTimer.subscribe(val => this.progress -= 10)
       }
