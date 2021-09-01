@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizService } from './quiz/quizAPI.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     HttpClientModule,
-    BrowserModule
+    BrowserModule,
+    NgbModule
   ],
   providers: [QuizService],
   bootstrap: [AppComponent]

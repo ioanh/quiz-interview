@@ -13,6 +13,7 @@ export class QuizComponent implements OnInit {
 
   questions: Array<Quiz>;
   question: Quiz;
+  progress: number;
 
   ngOnInit(): void {
     this.quizService.getQuestions().subscribe(
@@ -21,9 +22,11 @@ export class QuizComponent implements OnInit {
         this.questions = data.results
         console.log(this.questions)
         this.question = this.questions[0]
+        this.progress = 10;
       }
     )
   }
+
 
   previousQ(){
     const pQ = this.questions.indexOf(this.question) - 1
