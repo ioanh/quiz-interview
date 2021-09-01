@@ -25,4 +25,9 @@ export class QuizComponent implements OnInit {
     )
   }
 
+  nextQ(){
+    const nQ = this.questions.indexOf(this.question) + 1
+    this.question = this.questions[nQ]
+  }
+
 }
