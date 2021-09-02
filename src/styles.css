@@ -1,4 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+
 body{
     background-color: blue;
 }
@@ -19,6 +20,11 @@ body{
 .quiz{
     background-color: white;
     border-radius: 15px;
+    transition-duration: 1s;
+}
+.theSlide{
+    animation: slideInLeft;
+    animation-duration: 2s;
 }
 
 ol{
@@ -32,6 +38,11 @@ li{
     border-radius: 15px;
     padding: 5px;
     font-size: 125%;
+    transition: .2s;
+}
+
+li:hover{
+    transform: scale(0.99);
 }
 
 small{

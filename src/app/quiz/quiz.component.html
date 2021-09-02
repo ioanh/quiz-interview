@@ -1,5 +1,5 @@
 <div id="wrapper">
-    <div class="quiz">
+    <div class="quiz" [ngClass]="slideAni ? 'theSlide' : ''">
         <div *ngIf="gamePlaying; else elseBlock">
             <p><ngb-progressbar type="danger" [value]="progress" [max]='60'></ngb-progressbar></p>
             <p>{{question.question}}</p>

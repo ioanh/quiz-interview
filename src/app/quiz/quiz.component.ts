@@ -12,7 +12,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private quizService: QuizService) { }
 
-  //
+  //Declaring the variables
   questions: Array<Quiz>;
   question: Quiz;
   progress: number;
@@ -21,8 +21,10 @@ export class QuizComponent implements OnInit {
   questionNumber: number;
   subscriptionToSource: Subscription;
   gamePlaying: boolean; 
+  slideAni = false;
 
   ngOnInit(): void {
+    //Getting the questions from the API service
     this.quizService.getQuestions().subscribe(
       (data) => {
         this.questions = data.results
@@ -30,7 +32,7 @@ export class QuizComponent implements OnInit {
         this.progress = 61;
         this.questionNumber = 0;
         this.gamePlaying = true;
-
+        //Subscribing to the 60sec counter for the auto question switch
         this.subscriptionToSource = this.source.subscribe((val) => {
           if(this.questionNumber < 9){
             this.question = this.questions[val + 1]
@@ -40,13 +42,16 @@ export class QuizComponent implements OnInit {
             this.gamePlaying = false;
           }
         })
-
+        //Counting 1s and decreasing the timer with each 1s
         this.progressTimer.subscribe(val => this.progress -= 1)
       }
     )
   }
 
+  //Clicking an answer
   nextQ(){
+    this.slideAni = true;
+    //If not the end of the questions
     if(this.questionNumber < 9){
       this.questionNumber += 1;
       this.question = this.questions[this.questionNumber]
@@ -63,6 +68,8 @@ export class QuizComponent implements OnInit {
     }else{
       this.gamePlaying = false;
     }
+    setTimeout(() => {this.slideAni = false}, 2000)
+
   }
 
 }
