@@ -30,27 +30,37 @@ export class QuizComponent implements OnInit {
         this.questionNumber = 0;
 
         this.subscriptionToSource = this.source.subscribe((val) => {
-          this.question = this.questions[val + 1]
-          this.progress = 61;
+          if(this.questionNumber <= 9){
+            this.question = this.questions[val + 1]
+            this.progress = 61;
+            this.gamePlaying = true;
+          }else {
+            this.gamePlaying = false;
+          }
         })
 
         this.progressTimer.subscribe(val => this.progress -= 1)
       }
     )
-
   }
 
   nextQ(){
-    this.questionNumber += 1;
-    this.question = this.questions[this.questionNumber]
-    this.progress = 61;
-
-    this.subscriptionToSource.unsubscribe();
-
-    this.subscriptionToSource = this.source.subscribe((val) => {
-      this.question = this.questions[this.questionNumber += 1]
+    if(this.questionNumber <= 9){
+      this.questionNumber += 1;
+      this.question = this.questions[this.questionNumber]
       this.progress = 61;
-    })
+  
+      this.subscriptionToSource.unsubscribe();
+  
+      this.subscriptionToSource = this.source.subscribe((val) => {
+        this.question = this.questions[this.questionNumber += 1]
+        this.progress = 61;
+      })
+
+      this.gamePlaying = true;
+    }else{
+      this.gamePlaying = false;
+    }
   }
 
 }

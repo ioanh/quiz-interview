@@ -1,10 +1,12 @@
 <div id="wrapper">
     <div class="quiz">
-        <p><ngb-progressbar type="danger" [value]="progress" [max]='60'></ngb-progressbar></p>
-        <p>{{question.question}}</p>
-        <ol type="A">
-            <li *ngFor="let answer of question.incorrect_answers" (click)="nextQ()"><small>{{answer}}</small></li>
-            <li (click)="nextQ()"><small>{{question.correct_answer}}</small></li>
-        </ol>
+        <div *ngIf="gamePlaying">
+            <p><ngb-progressbar type="danger" [value]="progress" [max]='60'></ngb-progressbar></p>
+            <p>{{question.question}}</p>
+            <ol type="A">
+                <li *ngFor="let answer of question.incorrect_answers" (click)="nextQ()"><small>{{answer}}</small></li>
+                <li (click)="nextQ()"><small>{{question.correct_answer}}</small></li>
+            </ol>
+        </div>
     </div>
 </div>
