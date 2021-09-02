@@ -25,12 +25,12 @@ export class QuizComponent implements OnInit {
       (data) => {
         this.questions = data.results
         this.question = this.questions[0]
-        this.progress = 60;
+        this.progress = 61;
         this.questionNumber = 0;
 
         this.subscriptionToSource = this.source.subscribe((val) => {
           this.question = this.questions[val + 1]
-          this.progress = 60;
+          this.progress = 61;
         })
 
         this.progressTimer.subscribe(val => this.progress -= 1)
@@ -42,13 +42,13 @@ export class QuizComponent implements OnInit {
   nextQ(){
     this.questionNumber += 1;
     this.question = this.questions[this.questionNumber]
-    this.progress = 60;
+    this.progress = 61;
 
     this.subscriptionToSource.unsubscribe();
 
     this.subscriptionToSource = this.source.subscribe((val) => {
       this.question = this.questions[this.questionNumber += 1]
-      this.progress = 60;
+      this.progress = 61;
     })
   }
 
