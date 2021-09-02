@@ -1,3 +1,7 @@
-<p><ngb-progressbar type="success" [value]="progress"></ngb-progressbar></p>
-<h1>{{question.question}}</h1>
-<button class="button btn-success" (click)='nextQ()'>next</button>
+<div id="wrapper">
+    <div class="quiz">
+        <p><ngb-progressbar type="danger" [value]="progress" [max]='60'></ngb-progressbar></p>
+        <h1>{{question.question}}</h1>
+        <button class="button btn-success" (click)='nextQ()'>next</button>
+    </div>
+</div>

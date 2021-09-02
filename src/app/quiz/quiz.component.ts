@@ -15,7 +15,7 @@ export class QuizComponent implements OnInit {
   questions: Array<Quiz>;
   question: Quiz;
   progress: number;
-  source = interval(10000);
+  source = interval(60000);
   progressTimer = interval(1000)
   questionNumber: number;
   subscriptionToSource: Subscription;
@@ -25,15 +25,15 @@ export class QuizComponent implements OnInit {
       (data) => {
         this.questions = data.results
         this.question = this.questions[0]
-        this.progress = 100;
+        this.progress = 60;
         this.questionNumber = 0;
 
         this.subscriptionToSource = this.source.subscribe((val) => {
           this.question = this.questions[val + 1]
-          this.progress = 110;
+          this.progress = 60;
         })
 
-        this.progressTimer.subscribe(val => this.progress -= 10)
+        this.progressTimer.subscribe(val => this.progress -= 1)
       }
     )
 
@@ -43,10 +43,12 @@ export class QuizComponent implements OnInit {
     this.questionNumber += 1;
     this.question = this.questions[this.questionNumber]
     this.progress = 100;
+
     this.subscriptionToSource.unsubscribe();
+
     this.subscriptionToSource = this.source.subscribe((val) => {
-      this.question = this.questions[this.questionNumber + 1]
-      this.progress = 100;
+      this.question = this.questions[this.questionNumber += 1]
+      this.progress = 60;
     })
   }
 
