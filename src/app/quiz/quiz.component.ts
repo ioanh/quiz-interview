@@ -12,6 +12,7 @@ export class QuizComponent implements OnInit {
 
   constructor(private quizService: QuizService) { }
 
+  //
   questions: Array<Quiz>;
   question: Quiz;
   progress: number;
@@ -28,9 +29,10 @@ export class QuizComponent implements OnInit {
         this.question = this.questions[0]
         this.progress = 61;
         this.questionNumber = 0;
+        this.gamePlaying = true;
 
         this.subscriptionToSource = this.source.subscribe((val) => {
-          if(this.questionNumber <= 9){
+          if(this.questionNumber < 9){
             this.question = this.questions[val + 1]
             this.progress = 61;
             this.gamePlaying = true;
@@ -45,7 +47,7 @@ export class QuizComponent implements OnInit {
   }
 
   nextQ(){
-    if(this.questionNumber <= 9){
+    if(this.questionNumber < 9){
       this.questionNumber += 1;
       this.question = this.questions[this.questionNumber]
       this.progress = 61;

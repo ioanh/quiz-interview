@@ -1,6 +1,6 @@
 <div id="wrapper">
     <div class="quiz">
-        <div *ngIf="gamePlaying">
+        <div *ngIf="gamePlaying; else elseBlock">
             <p><ngb-progressbar type="danger" [value]="progress" [max]='60'></ngb-progressbar></p>
             <p>{{question.question}}</p>
             <ol type="A">
@@ -8,5 +8,9 @@
                 <li (click)="nextQ()"><small>{{question.correct_answer}}</small></li>
             </ol>
         </div>
+        <ng-template #elseBlock>
+            <p>You have finished the Quiz!<br/>Thank you for playing!</p>
+            <button class="button btn btn-primary" onClick="window.location.reload()">Reload!</button>
+        </ng-template>
     </div>
 </div>
