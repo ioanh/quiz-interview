@@ -19,3 +19,14 @@ body{
 .quiz{
     background-color: white;
 }
+
+ol{
+    text-align: left;
+}
+
+li{
+    background-color: rgb(230, 230, 230);
+    margin: 5px;
+    cursor: pointer;
+}
+

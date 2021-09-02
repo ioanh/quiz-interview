@@ -19,6 +19,7 @@ export class QuizComponent implements OnInit {
   progressTimer = interval(1000);
   questionNumber: number;
   subscriptionToSource: Subscription;
+  gamePlaying: boolean; 
 
   ngOnInit(): void {
     this.quizService.getQuestions().subscribe(
