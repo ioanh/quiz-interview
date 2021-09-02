@@ -16,7 +16,7 @@ export class QuizComponent implements OnInit {
   question: Quiz;
   progress: number;
   source = interval(60000);
-  progressTimer = interval(1000)
+  progressTimer = interval(1000);
   questionNumber: number;
   subscriptionToSource: Subscription;
 
@@ -42,7 +42,7 @@ export class QuizComponent implements OnInit {
   nextQ(){
     this.questionNumber += 1;
     this.question = this.questions[this.questionNumber]
-    this.progress = 100;
+    this.progress = 60;
 
     this.subscriptionToSource.unsubscribe();
 
