@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quizAPI.service';
 import { Quiz } from './quiz.model';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
@@ -17,6 +17,8 @@ export class QuizComponent implements OnInit {
   progress: number;
   source = interval(10000);
   progressTimer = interval(1000)
+  questionNumber: number;
+  subscriptionToSource: Subscription;
 
   ngOnInit(): void {
     this.quizService.getQuestions().subscribe(
@@ -24,8 +26,9 @@ export class QuizComponent implements OnInit {
         this.questions = data.results
         this.question = this.questions[0]
         this.progress = 100;
+        this.questionNumber = 0;
 
-        this.source.subscribe((val) => {
+        this.subscriptionToSource = this.source.subscribe((val) => {
           this.question = this.questions[val + 1]
           this.progress = 110;
         })
@@ -37,10 +40,14 @@ export class QuizComponent implements OnInit {
   }
 
   nextQ(){
-    const nQ = this.questions.indexOf(this.question) + 1
-    this.question = this.questions[nQ]
-    this.progress += 10;
-    setTimeout(this.nextQ, 3000);
+    this.questionNumber += 1;
+    this.question = this.questions[this.questionNumber]
+    this.progress = 100;
+    this.subscriptionToSource.unsubscribe();
+    this.subscriptionToSource = this.source.subscribe((val) => {
+      this.question = this.questions[this.questionNumber + 1]
+      this.progress = 100;
+    })
   }
 
 }
